@@ -1,6 +1,10 @@
 DijetScoutingRootTreeMaker
 ==========================
 
+Please look at 
+https://docs.google.com/document/d/1PhHJgq6JYDoib5kvk2WF28oEo5mXk7FcqM_piscsOXk/edit
+====================================================
+
 Information: https://twiki.cern.ch/twiki/bin/viewauth/CMS/ExoDijet13TeV#Analysis_code_data_scouting_anal
 
 Setup release:
