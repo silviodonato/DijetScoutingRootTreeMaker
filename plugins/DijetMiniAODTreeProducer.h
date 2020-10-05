@@ -88,7 +88,7 @@ private:
     //---- output TREE variables ------
     //---- global event variables -----
     int   isData_, run_, evt_, nVtx_, lumi_;
-    int   nJetsAK4_, nGenJetsAK4_;
+    int   nJetsAK4_, nGenJetsAK4_, nweights_;
     float rho_, met_, metSig_, metSigreco_, offMet_, offMetSig_, mhtAK4_,
         mhtAK4Sig_;
     float htAK4_, mjjAK4_, dEtajjAK4_, dPhijjAK4_;
@@ -97,7 +97,7 @@ private:
     //---- jet and genJet variables --------------
     std::vector<float> *ptAK4_, *jecAK4_, *etaAK4_, *phiAK4_, *massAK4_,
         *energyAK4_, *areaAK4_, *csvAK4_, *chfAK4_, *nhfAK4_, *phfAK4_,
-        *elfAK4_, *mufAK4_, *nemfAK4_, *cemfAK4_;
+        *elfAK4_, *mufAK4_, *nemfAK4_, *cemfAK4_, *weights_;
     std::vector<int> *idLAK4_, *idTAK4_, *chHadMultAK4_, *chMultAK4_,
         *neHadMultAK4_, *neMultAK4_, *phoMultAK4_;
     std::vector<float> *hf_hfAK4_, *hf_emfAK4_, *hofAK4_;

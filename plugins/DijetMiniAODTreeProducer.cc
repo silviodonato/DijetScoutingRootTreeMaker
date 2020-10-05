@@ -224,12 +224,17 @@ void DijetMiniAODTreeProducer::beginJob()
     outTree_->Branch("weight",             &weight_,        "weight_/F");
 
     outTree_->Branch("nGenJetsAK4",        &nGenJetsAK4_,   "nGenJetsAK4_/I");
+    outTree_->Branch("nweights",           &nweights_,      "nweights_/I");
 
     ptGenAK4_     = new std::vector<float>;
     etaGenAK4_    = new std::vector<float>;
     phiGenAK4_    = new std::vector<float>;
     massGenAK4_   = new std::vector<float>;
     energyGenAK4_ = new std::vector<float>;
+
+    weights_     = new std::vector<float>;
+
+    outTree_->Branch("weights",          "vector<float>", &weights_);
 
     outTree_->Branch("jetPtGenAK4",     "vector<float>", &ptGenAK4_);
     outTree_->Branch("jetEtaGenAK4",    "vector<float>", &etaGenAK4_);
@@ -382,6 +387,9 @@ void DijetMiniAODTreeProducer::analyze(const Event& iEvent,
                       ? genEvtInfo->binningValues()[0] : -999.);
             processID_ = genEvtInfo->signalProcessID();
             weight_ = genEvtInfo->weight();
+            nweights_ = genEvtInfo->weights().size();
+            for (vector<double>::const_iterator it = genEvtInfo->weights().begin(); it != genEvtInfo->weights().end(); ++it ) 
+                 weights_->push_back(float(*it));
         }
 
         //------------------ Gen particles hard scattering -------------------
@@ -389,6 +397,7 @@ void DijetMiniAODTreeProducer::analyze(const Event& iEvent,
         if (!iEvent.isRealData())
             iEvent.getByToken(srcPrunedGenParticles_, prunedGenParticles);
         if (prunedGenParticles.isValid()) {
+//            cout << prunedGenParticles->size() << endl;
             for (reco::GenParticleCollection::const_iterator it = prunedGenParticles->begin();
                  it != prunedGenParticles->end(); ++it ) {
                 int idx = distance(prunedGenParticles->begin(), it);
@@ -669,7 +678,9 @@ void DijetMiniAODTreeProducer::initialize()
     weight_      = -999;
 
     nGenJetsAK4_ = -999;
-
+    nweights_ = -999;
+    
+    weights_      ->clear();
     ptGenAK4_      ->clear();
     phiGenAK4_     ->clear();
     etaGenAK4_     ->clear();

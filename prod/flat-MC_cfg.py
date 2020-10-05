@@ -10,7 +10,8 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 
 options = VarParsing.VarParsing('analysis')
 options.outputFile = 'dijetscouting_bigtree.root'
-options.inputFiles = ''
+options.inputFiles = 'root://cms-xrd-global.cern.ch//store/mc/RunIIAutumn18MiniAOD/RSGravitonToQuarkQuark_kMpl01_M_500_TuneCP5_13TeV_pythia8/MINIAODSIM/102X_upgrade2018_realistic_v15-v1/240000/053F439A-D565-2140-9316-CD86FD917345.root'
+#options.inputFiles = ''
 options.maxEvents = -1
 options.register('reportEvery',
                  1000, # default value
@@ -253,6 +254,7 @@ process.dijetscouting = cms.EDAnalyzer(
         daqPartitions         = cms.uint32(1),
         l1tIgnoreMask         = cms.bool(False),
         l1techIgnorePrescales = cms.bool(False),
+        l1tIgnoreMaskAndPrescale = cms.bool(False),
         throw                 = cms.bool(False)
     ),
 
@@ -271,4 +273,4 @@ process.dijetscouting = cms.EDAnalyzer(
 
 # ------------------ path --------------------------
 
-process.p = cms.Path(process.dijetscouting)
+process.p = cms.Path(process.prunedGenParticlesDijet + process.dijetscouting)
